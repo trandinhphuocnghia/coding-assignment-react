@@ -1,25 +1,18 @@
-import { Ticket } from '@acme/shared-models';
-import styles from './tickets.module.css';
+import Button from 'client/src/components/Button';
+import { Plus } from 'lucide-react';
 
-export interface TicketsProps {
-  tickets: Ticket[];
-}
-
-export function Tickets(props: TicketsProps) {
+export function Tickets() {
   return (
-    <div className={styles['tickets']}>
-      <h2>Tickets</h2>
-      {props.tickets ? (
-        <ul>
-          {props.tickets.map((t) => (
-            <li key={t.id}>
-              Ticket: {t.id}, {t.description}
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <span>...</span>
-      )}
+    <div className="w-full flex gap-6 flex-col">
+      <div className="w-full flex items-center">
+        <Button
+          variant="primary"
+          className="bg-[#7784EE] mr-0 ml-auto rounded-lg border text-white text-xs px-7 py-3 font-semibold"
+        >
+          <Plus size={16} />
+          <p>Create</p>
+        </Button>
+      </div>
     </div>
   );
 }
