@@ -5,7 +5,7 @@ export default function Layout() {
   return (
     <div className="w-screen relative">
       <Navbar />
-      <div className="w-full p-4 lg:p-7">
+      <div className="w-full p-4 lg:p-7 py-5">
         <Outlet />
       </div>
     </div>

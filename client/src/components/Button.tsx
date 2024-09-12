@@ -6,7 +6,8 @@ export default function Button(props: TButton) {
   let variantClassName =
     'border border-[#F5F5F7] hover:text-[#7784EE] hover:outline hover:outline-[#7784EE] px-7 py-3 ';
   if (props.variant === 'primary') {
-    variantClassName = '';
+    variantClassName =
+      'bg-[#7784EE] text-[#FFF] hover:outline-[#7784EE] px-7 py-3';
   }
   if (props.variant == 'secondary') {
     variantClassName = '';
