@@ -1,5 +1,5 @@
 import Layout from '../layout';
-import Tickets from '../app/tickets/tickets';
+import Tickets from '../app/tickets';
 import { RouteObject } from 'react-router-dom';
 
 const routes: RouteObject[] = [

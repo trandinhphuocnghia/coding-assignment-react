@@ -1,5 +1,6 @@
 import Button from 'client/src/components/Button';
 import { Plus } from 'lucide-react';
+import Board from './Board';
 
 export function Tickets() {
   return (
@@ -13,6 +14,7 @@ export function Tickets() {
           <p>Create</p>
         </Button>
       </div>
+      <Board />
     </div>
   );
 }

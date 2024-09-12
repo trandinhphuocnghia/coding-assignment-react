@@ -15,11 +15,11 @@ import { useParams } from 'react-router-dom';
 export default function Navbar() {
   const { userId } = useParams();
   return (
-    <div className="w-full p-4 lg:p-7 flex flex-col gap-6 bg-white">
-      <div className="w-full flex justify-between items-center">
+    <div className="m-auto border-b border-[#DBDBDB] w-full p-4 lg:p-7 flex flex-col gap-6 bg-white">
+      <div className="w-full flex justify-between items-center gap-6">
         <h1 className="text-xl text-[#2D2D2D] font-semibold">Tickets</h1>
         <Dropdown>
-          <MenuButton className="flex hover:opacity-[0.8] transition-all items-center border border-[#F5F5F7] hover:text-[#7784EE] hover:outline hover:outline-[#7784EE] rounded-lg px-7 py-3 gap-3">
+          <MenuButton className="w-full text-[#787486] max-w-[180px] flex hover:opacity-[0.8] transition-all items-center border border-[#787486] hover:text-[#7784EE] hover:outline hover:outline-[#7784EE] rounded-lg px-7 py-3 gap-3">
             <ViewIcon size={16} />
             <p className="text-xs font-semibold">All</p>
           </MenuButton>
@@ -27,15 +27,15 @@ export default function Navbar() {
         </Dropdown>
       </div>
 
-      <div className="w-full flex items-center justify-between">
+      <div className="w-full flex items-center justify-between gap-6">
         <Input
-          rootclassname="w-fit rounded-lg hover:outline transition-all hover:outline-[#7784EE] text-xs flex items-center border-[#F5F5F7] px-7 py-3 justify-center border gap-3"
+          rootclassname="w-full text-[#787486] max-w-md rounded-lg hover:outline transition-all hover:outline-[#7784EE] text-xs flex items-center px-7 py-3 justify-center bg-[#F5F5F5] gap-3"
           placeholder="Search"
-          inputclassname="border-none outline-none"
+          inputclassname="border-none bg-transparent outline-none"
           endAdornment={<SearchIcon size={16} />}
         />
         <Dropdown>
-          <MenuButton className="flex hover:opacity-[0.8] transition-all items-center border border-[#F5F5F7] hover:text-[#7784EE] hover:outline hover:outline-[#7784EE] rounded-lg px-7 py-3 gap-3">
+          <MenuButton className="flex border-[#787486] text-[#787486] w-full max-w-[180px] hover:opacity-[0.8] transition-all items-center border hover:text-[#7784EE] hover:outline hover:outline-[#7784EE] rounded-lg px-7 py-3 gap-3">
             <ListFilter size={16} />
             <p className="text-xs font-semibold">Status</p>
           </MenuButton>

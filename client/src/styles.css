@@ -11,5 +11,6 @@ body {
   height: 100%;
   position: relative;
   overflow-y: hidden;
-  background: #fafafa;
+  background: #fff;
+  box-shadow: 0px 44px 84px 6px #d8d9db;
 }

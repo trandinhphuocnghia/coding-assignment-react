@@ -5,7 +5,12 @@ import {
   SlotComponentProps,
 } from '@mui/base';
 import { TInput } from '../types';
+import { cn } from '../lib/util';
 
+/*
+ * Component: Input.
+ * Description: It's a custom input component based on the MUI/Base Input, easy to extend styling.
+ */
 export default function Input(props: TInput) {
   const slotProps = {
     root: (): SlotComponentProps<
@@ -17,7 +22,7 @@ export default function Input(props: TInput) {
       'input',
       InputRootSlotPropsOverrides,
       InputOwnerState
-    > => ({ className: props.inputclassname }),
+    > => ({ className: cn(['w-full', props.inputclassname]) }),
   };
 
   return <BaseInput {...props} slotProps={slotProps} />;
