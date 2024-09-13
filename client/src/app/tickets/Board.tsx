@@ -6,41 +6,13 @@ import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 import Column from './Column';
 import { useMutation } from '@tanstack/react-query';
 
-export default function Board() {
-  const { data, isFetching } = useTickets();
-  const [columns, setColumns] = useState<{
-    [key: string]: IColumn;
-  }>({
-    todo: {
-      id: 'todo',
-      title: 'Todo',
-      tickets: [] as Ticket[],
-      className: 'bg-[#F5F5F5]',
-    } as IColumn,
-    completed: {
-      id: 'completed',
-      title: 'Done',
-      tickets: [] as Ticket[],
-      className: 'bg-[#EDF9E8]',
-    } as IColumn,
-  });
-
-  useEffect(() => {
-    if (!isFetching) {
-      setColumns({
-        ...columns,
-        todo: {
-          ...columns['todo'],
-          tickets: (data || [])?.filter((item) => !item.completed),
-        },
-        completed: {
-          ...columns['completed'],
-          tickets: (data || [])?.filter((item) => item.completed),
-        },
-      });
-    }
-  }, [isFetching]);
-
+export default function Board({
+  columns,
+  setColumns,
+}: {
+  columns: { [key: string]: IColumn };
+  setColumns: (column: { [key: string]: IColumn }) => void;
+}) {
   //PUT: Mark as complete.
   const markAsComplete = useMutation({
     mutationFn: (ticketId: number) => {
@@ -76,10 +48,12 @@ export default function Board() {
         [source.droppableId]: {
           ...sourceColumn,
           tickets: sourceItems,
+          total: sourceItems.length,
         },
         [destination.droppableId]: {
           ...destColumn,
           tickets: destItems,
+          total: destItems.length,
         },
       });
       if (destination.droppableId == 'todo') {
@@ -105,11 +79,9 @@ export default function Board() {
 
   return (
     <DragDropContext onDragEnd={(result) => onDragEnd(result)}>
-      <div className="w-full  flex flex-col md:flex-row gap-6">
-        {Object.values(columns).map((column) => (
-          <Column key={column.id} {...column} />
-        ))}
-      </div>
+      {Object.values(columns).map((column) => (
+        <Column key={column.id} {...column} />
+      ))}
     </DragDropContext>
   );
 }

@@ -82,7 +82,7 @@ export default function Ticket(props: ITicket) {
             </Button>
           )}
         </MenuButton>
-        <Menu className="bg-white z-10 rounded-lg shadow-[0px_5px_15px_0px_rgba(119,132,238,0.30)]">
+        <Menu className="bg-white z-[1] rounded-lg shadow-[0px_5px_15px_0px_rgba(119,132,238,0.30)]">
           {users?.map((user) => (
             <MenuItem
               onClick={() => {

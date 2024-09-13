@@ -24,6 +24,7 @@ export interface IColumn {
   tickets: Ticket[];
   className?: string;
   id: 'todo' | 'completed';
+  total: number;
 }
 
 export interface ITicket extends Ticket {

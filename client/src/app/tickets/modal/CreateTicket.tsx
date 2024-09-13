@@ -35,7 +35,9 @@ export default function CreateTicket() {
 
   const onSubmit: SubmitHandler<Partial<Ticket>> = (data) => {
     createTicket.mutateAsync(data).then(() => {
-      reset();
+      reset({
+        description: '',
+      });
       setOpen(false);
     });
   };
@@ -45,7 +47,7 @@ export default function CreateTicket() {
       <Button
         onClick={() => setOpen(true)}
         variant="primary"
-        className="bg-[#7784EE] mr-0 ml-auto rounded-lg border text-white text-xs px-7 py-3 font-semibold"
+        className="bg-[#7784EE] mr-0 ml-auto rounded-lg border text-white text-xs px-4 py-2 font-semibold"
       >
         <Plus size={16} />
         <p>Create</p>
@@ -56,7 +58,7 @@ export default function CreateTicket() {
         open={open}
         onClose={() => setOpen(false)}
       >
-        <div className="w-full gap-4 flex flex-col">
+        <div className="w-full z-20  gap-4 flex flex-col">
           <div className="w-full flex items-center">
             <Tag fill="#C4CAD3" stroke="#FFF" size={20} />
             <Button
