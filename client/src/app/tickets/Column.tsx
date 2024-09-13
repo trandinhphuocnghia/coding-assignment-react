@@ -10,7 +10,7 @@ export default function Column(props: IColumn) {
       {(provided) => (
         <div
           className={cn([
-            'w-full max-w-[375px] h-full overflow-auto  rounded-2xl p-4 flex flex-col gap-5',
+            'w-full max-w-[375px] h-fit rounded-2xl p-4 flex flex-col gap-5',
             props.className,
           ])}
           ref={provided.innerRef}

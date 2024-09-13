@@ -8,19 +8,25 @@ body {
   padding: 0;
 
   height: 100dvh;
-  overflow: hidden;
-  background: #fff;
   box-shadow: 0px 44px 84px 6px #d8d9db;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  overflow-y: auto;
+}
+
+#root {
+  flex: 1;
 }
 
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 6px;
+  width: 6px;
+  height: 2px;
 }
 ::-webkit-scrollbar * {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: transparent !important;
+  background: #f0f5fc !important;
   border-radius: 5px;
 }
