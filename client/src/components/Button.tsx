@@ -1,6 +1,7 @@
 import { Button as BaseButton } from '@mui/base';
 import { TButton } from 'client/src/types';
 import { cn } from '../lib/util';
+import { Ellipsis } from 'lucide-react';
 
 export default function Button(props: TButton) {
   let variantClassName =
@@ -21,7 +22,12 @@ export default function Button(props: TButton) {
         variantClassName,
         props.className,
       ])}
+      disabled={props.disabled}
     >
+      <Ellipsis
+        className={cn('animate-bounce hidden', { flex: !!props.loading })}
+        size={16}
+      />
       {props.children}
     </BaseButton>
   );

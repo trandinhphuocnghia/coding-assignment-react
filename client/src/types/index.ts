@@ -15,6 +15,8 @@ export type TModal = ModalProps & {
 
 export type TButton = ButtonProps & {
   variant?: 'primary' | 'secondary';
+  loading?: boolean;
+  disabled?: boolean;
 };
 
 export interface IColumn {

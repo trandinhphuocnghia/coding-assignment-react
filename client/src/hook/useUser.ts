@@ -4,6 +4,8 @@ import { useQuery } from '@tanstack/react-query';
 const useUsers = () => {
   return useQuery({
     queryKey: ['/api/users'],
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
     queryFn: async () => {
       const response = await fetch('/api/users').then();
       const data = await response.json();
