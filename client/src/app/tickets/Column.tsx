@@ -8,12 +8,12 @@ export default function Column(props: IColumn) {
   return (
     <div
       className={cn([
-        'w-full max-w-[375px] rounded-2xl p-5 flex flex-col gap-5 h-fit',
+        'w-full max-w-[375px] mb-10 rounded-2xl p-4 flex flex-col gap-5 h-fit',
         props.className,
       ])}
     >
-      {props.id == 'todo' && <TodoHeader />}
-      {props.id == 'completed' && <CompletedHeader />}
+      {props.id == 'todo' && <TodoHeader total={props.total} />}
+      {props.id == 'completed' && <CompletedHeader total={props.total} />}
       <Droppable type="COLUMN" droppableId={props.id} key={props.id}>
         {(provided) => (
           <div
@@ -27,15 +27,17 @@ export default function Column(props: IColumn) {
                 draggableId={ticket.id.toString()}
                 index={index}
               >
-                {(provided) => (
-                  <div
-                    ref={provided.innerRef}
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps}
-                  >
-                    <Ticket {...ticket} />
-                  </div>
-                )}
+                {(provided) => {
+                  return (
+                    <div
+                      ref={provided.innerRef}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                    >
+                      <Ticket {...ticket} />
+                    </div>
+                  );
+                }}
               </Draggable>
             ))}
             {provided.placeholder}

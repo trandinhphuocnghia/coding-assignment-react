@@ -1,5 +1,4 @@
 import { useRoutes } from 'react-router-dom';
-
 import routes from '../routes';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
