@@ -39,13 +39,11 @@ export function Tickets() {
   // Helper to filter tickets
   const filterTickets = (tickets: Ticket[], isCompleted: boolean) =>
     tickets.filter((ticket) => ticket.completed === isCompleted);
-
   // Helper to filter tickets by assigneeId if userId is provided
   const filterByAssignee = (tickets: Ticket[], userId: string | null) =>
     userId
       ? tickets.filter((ticket) => ticket.assigneeId === Number(userId))
       : tickets;
-
   // Helper to filter tickets by search term (autocomplete)
   const filterBySearchTerm = (tickets: Ticket[], searchTerm: string) =>
     tickets.filter((ticket) =>
@@ -99,8 +97,8 @@ export function Tickets() {
   }, [filteredColumns['completed'].total, totalTicket]);
 
   return (
-    <div className="w-full flex flex-col gap-6 mb-10 relative p-4 lg:px-7">
-      <div className="w-full rounded-2xl p-4 bg-[#FAFAFA] sticky top-3 z-10 flex gap-6 flex-col md:flex-row items-center">
+    <div className="w-full flex flex-col gap-6 relative p-3 lg:px-7">
+      <div className="w-full rounded-2xl p-3 bg-[#FAFAFA] sticky top-3 z-10 flex gap-6 flex-col md:flex-row items-center">
         <div className="w-full flex items-center gap-6">
           <Input
             rootclassname="w-full !max-w-[343px] text-[#787486] max-w-md rounded-lg hover:outline transition-all hover:outline-[#7784EE] text-xs flex items-center px-4 py-2 justify-center bg-white gap-3"
@@ -128,7 +126,7 @@ export function Tickets() {
         </div>
         <CreateTicket />
       </div>
-      <div className="w-full h-full flex flex-col md:flex-row gap-6">
+      <div className="w-full relative flex flex-col md:flex-row gap-6">
         <Board
           columns={filteredColumns}
           setColumns={(columns) => setColumns(columns)}

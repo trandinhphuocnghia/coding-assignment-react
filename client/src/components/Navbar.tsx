@@ -17,7 +17,7 @@ export default function Navbar() {
   }, [params.get('userId')]);
 
   return (
-    <div className="m-auto border-b border-[#DBDBDB] w-full p-4 lg:px-7 flex flex-col gap-4 bg-white">
+    <div className="m-auto border-b border-[#DBDBDB] w-full p-3 lg:px-7 flex flex-col gap-4 bg-white">
       <div className="w-full flex justify-between items-center gap-6">
         <h1 className="text-lg text-[#2D2D2D] flex gap-2 font-bold">
           <span className="w-7 h-7 flex items-center justify-center rounded-full text-xs font-bold text-[#FFF] bg-[#7784EE]">
