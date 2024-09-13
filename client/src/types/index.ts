@@ -1,29 +1,31 @@
-import { ButtonProps, InputProps } from '@mui/base';
-import { ReactNode } from 'react';
 import { Ticket } from '@acme/shared-models';
-import { DraggableProps, DroppableProps } from 'react-beautiful-dnd';
+import { ButtonProps, InputProps, ModalProps } from '@mui/base';
+import { ReactNode } from 'react';
 
 export type TInput = InputProps & {
   rootclassname?: string;
   inputclassname?: string;
 };
+export type TModal = ModalProps & {
+  children: ReactNode;
+  open: boolean;
+  onClose: () => void;
+  className?: string;
+};
 
 export type TButton = ButtonProps & {
   variant?: 'primary' | 'secondary';
+  loading?: boolean;
+  disabled?: boolean;
 };
 
 export interface IColumn {
-  header: ReactNode;
+  header?: ReactNode;
   tickets: Ticket[];
   className?: string;
-  id: string;
+  id: 'todo' | 'completed';
 }
 
-export interface IDrop extends Omit<DroppableProps, 'children'> {
-  children: ReactNode;
+export interface ITicket extends Ticket {
   className?: string;
-}
-
-export interface IDrag extends Omit<DraggableProps, 'children'> {
-  children: ReactNode;
 }
