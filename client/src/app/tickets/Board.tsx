@@ -1,17 +1,16 @@
-import { Ticket } from '@acme/shared-models';
-import { useTickets } from 'client/src/hook/useTickets';
+import { useMutation } from '@tanstack/react-query';
 import { IColumn } from 'client/src/types';
-import { useEffect, useState } from 'react';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 import Column from './Column';
-import { useMutation } from '@tanstack/react-query';
 
 export default function Board({
   columns,
   setColumns,
+  isFetching,
 }: {
   columns: { [key: string]: IColumn };
   setColumns: (column: { [key: string]: IColumn }) => void;
+  isFetching: boolean;
 }) {
   //PUT: Mark as complete.
   const markAsComplete = useMutation({
@@ -80,7 +79,7 @@ export default function Board({
   return (
     <DragDropContext onDragEnd={(result) => onDragEnd(result)}>
       {Object.values(columns).map((column) => (
-        <Column key={column.id} {...column} />
+        <Column key={column.id} props={column} isFetching={isFetching} />
       ))}
     </DragDropContext>
   );
