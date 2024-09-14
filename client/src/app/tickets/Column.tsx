@@ -4,7 +4,13 @@ import { Draggable, Droppable } from 'react-beautiful-dnd';
 import Ticket from './Ticket';
 import { CompletedHeader, TodoHeader } from './headers';
 
-export default function Column(props: IColumn) {
+export default function Column({
+  props,
+  isFetching,
+}: {
+  props: IColumn;
+  isFetching: boolean;
+}) {
   return (
     <Droppable droppableId={props.id} key={props.id}>
       {(provided) => (
@@ -38,6 +44,9 @@ export default function Column(props: IColumn) {
               }}
             </Draggable>
           ))}
+          {isFetching && (
+            <div className="w-full flex flex-col gap-2 min-h-[92px] animate-pulse rounded-xl bg-slate-100 p-4"></div>
+          )}
           {provided.placeholder}
         </div>
       )}

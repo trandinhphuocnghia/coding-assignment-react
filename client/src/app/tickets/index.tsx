@@ -15,7 +15,7 @@ export function Tickets() {
 
   const userId = queryParams.get('userId');
 
-  const { data, isFetching } = useTickets();
+  const { data, isFetching, isLoading } = useTickets();
   const [searchTerm, setSearchTerm] = useState('');
   const [columns, setColumns] = useState<{
     [key: string]: IColumn;
@@ -54,7 +54,6 @@ export function Tickets() {
     if (!isFetching && data) {
       const todoTickets = filterTickets(data, false);
       const completedTickets = filterTickets(data, true);
-
       setColumns((prev) => ({
         ...prev,
         todo: {
@@ -91,7 +90,6 @@ export function Tickets() {
   const totalTicket = useMemo(() => {
     return filteredColumns['todo'].total + filteredColumns['completed'].total;
   }, [filteredColumns]);
-
   const progress = useMemo(() => {
     return (filteredColumns['completed'].total / totalTicket) * 100;
   }, [filteredColumns['completed'].total, totalTicket]);
@@ -128,6 +126,7 @@ export function Tickets() {
       </div>
       <div className="w-full relative flex flex-col md:flex-row gap-6">
         <Board
+          isFetching={isLoading}
           columns={filteredColumns}
           setColumns={(columns) => setColumns(columns)}
         />
