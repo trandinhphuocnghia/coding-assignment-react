@@ -3,7 +3,7 @@ import Button from 'client/src/components/Button';
 import useUsers from 'client/src/hook/useUser';
 import { cn, getFirstCharacter } from 'client/src/lib/util';
 import { ITicket } from 'client/src/types';
-import { Maximize2, UserPlus } from 'lucide-react';
+import { LoaderCircle, Maximize2, UserPlus } from 'lucide-react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useMemo } from 'react';
 
@@ -53,9 +53,15 @@ export default function Ticket(props: ITicket) {
       </Button>
       <p className="text-[#121212] text-xs">{props.description}</p>
       <Dropdown>
-        <MenuButton className="w-fit ml-auto mr-0">
+        <MenuButton className="w-fit flex items-center gap-2 ml-auto mr-0">
+          {(assignTicket.isPending || unAssignTicket.isPending) && (
+            <LoaderCircle size={12} className="animate-spin text-[#7784EE]" />
+          )}
           {!!assigned ? (
-            <Button className="border-none !outline-none group gap-0 px-1 p-1 !w-fit flex justify-center items-center -space-x-2">
+            <Button
+              disabled={assignTicket.isPending || unAssignTicket.isPending}
+              className="border-none !outline-none group gap-0 px-1 p-1 !w-fit flex justify-center items-center -space-x-2"
+            >
               <span className="w-6 z-[1] h-6 flex items-center justify-center rounded-full text-xs font-semibold text-[#FFF] bg-[#7784EE]">
                 {getFirstCharacter(assigned.name)}
               </span>
@@ -71,6 +77,7 @@ export default function Ticket(props: ITicket) {
           ) : (
             <Button
               type="button"
+              disabled={assignTicket.isPending || unAssignTicket.isPending}
               className="ml-auto  mr-0 rounded-full w-fit text-[#C4CAD3] p-2 group outline-dashed border-none hover:outline-dashed flex items-center gap-2"
             >
               <UserPlus
