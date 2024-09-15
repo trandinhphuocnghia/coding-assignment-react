@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import Button from 'client/src/components/Button';
 import Modal from 'client/src/components/Modal';
 import { cn } from 'client/src/lib/util';
-import { ChevronDown, Plus, Tag, UserPlus, X } from 'lucide-react';
+import { Plus, Tag, X } from 'lucide-react';
 import { useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
@@ -116,7 +116,7 @@ export default function CreateTicket() {
                 </>
               )}
             />
-            <Button
+            {/* <Button
               type="button"
               className="w-full text-[#C4CAD3] group px-0 !hover:outline-none flex items-center gap-5 border-none"
             >
@@ -128,7 +128,7 @@ export default function CreateTicket() {
               />
               <p className=" text-start flex-1 text-xs">Assign ticket to</p>
               <ChevronDown size={16} />
-            </Button>
+            </Button> */}
             <Button
               loading={createTicket.isPending}
               disabled={createTicket.isPending}
