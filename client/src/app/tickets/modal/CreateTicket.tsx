@@ -4,6 +4,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import Button from 'client/src/components/Button';
 import Modal from 'client/src/components/Modal';
 import { cn } from 'client/src/lib/util';
+import { QueryKeys } from 'client/src/types';
 import { Plus, Tag, X } from 'lucide-react';
 import { useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
@@ -29,7 +30,7 @@ export default function CreateTicket() {
       });
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['/api/tickets'] });
+      queryClient.invalidateQueries({ queryKey: [QueryKeys.Tickets] });
     },
   });
 
@@ -47,7 +48,7 @@ export default function CreateTicket() {
       <Button
         onClick={() => setOpen(true)}
         variant="primary"
-        className="bg-[#7784EE] mr-0 ml-auto rounded-lg border text-white text-xs px-4 py-2 font-semibold"
+        className="bg-[#7784EE] md:w-fit w-full flex justify-center items-center mr-0 ml-auto rounded-lg border text-white text-xs px-4 py-2 font-semibold"
       >
         <Plus size={16} />
         <p>Create</p>
