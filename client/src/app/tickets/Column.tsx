@@ -44,8 +44,12 @@ export default function Column({
               }}
             </Draggable>
           ))}
-          {isFetching && (
+          {isFetching ? (
             <div className="w-full flex flex-col gap-2 min-h-[92px] animate-pulse rounded-xl bg-slate-100 p-4"></div>
+          ) : (
+            !props.total && (
+              <div className="w-full border-dashed flex flex-col gap-2 min-h-[92px] border border-[#DBDBDB] rounded-xl  p-4"></div>
+            )
           )}
           {provided.placeholder}
         </div>

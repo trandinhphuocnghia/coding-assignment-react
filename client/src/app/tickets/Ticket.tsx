@@ -2,7 +2,7 @@ import { Dropdown, Menu, MenuButton, MenuItem } from '@mui/base';
 import Button from 'client/src/components/Button';
 import useUsers from 'client/src/hook/useUser';
 import { cn, getFirstCharacter } from 'client/src/lib/util';
-import { ITicket } from 'client/src/types';
+import { ITicket, QueryKeys } from 'client/src/types';
 import { LoaderCircle, Maximize2, UserPlus } from 'lucide-react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useMemo } from 'react';
@@ -23,7 +23,7 @@ export default function Ticket(props: ITicket) {
       });
     },
     onSuccess: () =>
-      queryClient.invalidateQueries({ queryKey: ['/api/tickets'] }),
+      queryClient.invalidateQueries({ queryKey: [QueryKeys.Tickets] }),
   });
   const assignTicket = useMutation({
     mutationFn: ({
@@ -38,7 +38,7 @@ export default function Ticket(props: ITicket) {
       });
     },
     onSuccess: () =>
-      queryClient.invalidateQueries({ queryKey: ['/api/tickets'] }),
+      queryClient.invalidateQueries({ queryKey: [QueryKeys.Tickets] }),
   });
 
   return (

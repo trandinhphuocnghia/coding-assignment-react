@@ -30,3 +30,8 @@ export interface IColumn {
 export interface ITicket extends Ticket {
   className?: string;
 }
+
+export enum QueryKeys {
+  Tickets = '/api/tickets',
+  Users = '/api/users',
+}
