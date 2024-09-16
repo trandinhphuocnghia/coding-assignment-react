@@ -11,7 +11,6 @@ import {
 import CreateTicket from './CreateTicket';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 
-//testing the wrapper aka the QueryClientProvider.
 const renderWithQueryClient = (ui: React.ReactElement) => {
   const queryClient = new QueryClient();
   return render(

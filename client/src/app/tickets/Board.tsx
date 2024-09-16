@@ -1,7 +1,8 @@
-import { useMutation } from '@tanstack/react-query';
-import { IColumn } from 'client/src/types';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { IColumn, QueryKeys } from 'client/src/types';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 import Column from './Column';
+import { Ticket } from '@acme/shared-models';
 
 export default function Board({
   columns,
@@ -12,10 +13,39 @@ export default function Board({
   setColumns: (column: { [key: string]: IColumn }) => void;
   isFetching: boolean;
 }) {
+  const queryClient = useQueryClient();
   //PUT: Mark as complete.
   const markAsComplete = useMutation({
     mutationFn: (ticketId: number) => {
       return fetch(`/api/tickets/${ticketId}/complete`, { method: 'PUT' });
+    },
+    onMutate: async (ticketId: number) => {
+      // Cancel any outgoing refetches for tickets
+      await queryClient.cancelQueries({ queryKey: [QueryKeys.Tickets] });
+      // Get the current ticket list from the cache
+      const previousTickets = queryClient.getQueryData<Ticket[]>([
+        '/api/tickets',
+      ]);
+      // Optimistically update the cache with the ticket marked as complete
+      if (previousTickets) {
+        queryClient.setQueryData<Ticket[]>([QueryKeys.Tickets], (oldTickets) =>
+          oldTickets?.map((ticket) =>
+            ticket.id === ticketId ? { ...ticket, completed: true } : ticket
+          )
+        );
+      }
+      // Return context with previous tickets in case of rollback
+      return { previousTickets };
+    },
+    onError: (error, ticketId, context) => {
+      if (!!context) {
+        // Rollback to the previous state if the mutation fails
+        queryClient.setQueryData(['/api/tickets'], context.previousTickets);
+      }
+    },
+    onSettled: () => {
+      // Refetch the ticket list to sync with server
+      queryClient.invalidateQueries({ queryKey: [QueryKeys.Tickets] });
     },
   });
 
@@ -23,6 +53,32 @@ export default function Board({
   const markAsInComplete = useMutation({
     mutationFn: (ticketId: number) => {
       return fetch(`/api/tickets/${ticketId}/complete`, { method: 'DELETE' });
+    },
+    onMutate: async (ticketId: number) => {
+      // Cancel any outgoing refetches for tickets
+      await queryClient.cancelQueries({ queryKey: [QueryKeys.Tickets] });
+      // Get the current ticket list from the cache
+      const previousTickets = queryClient.getQueryData<Ticket[]>([
+        QueryKeys.Tickets,
+      ]);
+      // Optimistically update the cache with the ticket marked as incomplete
+      if (previousTickets) {
+        queryClient.setQueryData<Ticket[]>([QueryKeys.Tickets], (oldTickets) =>
+          oldTickets?.map((ticket) =>
+            ticket.id === ticketId ? { ...ticket, completed: false } : ticket
+          )
+        );
+      }
+      // Return context with previous tickets in case of rollback
+      return { previousTickets };
+    },
+    onError: (error, ticketId, context: any) => {
+      // Rollback to the previous state if the mutation fails
+      queryClient.setQueryData([QueryKeys.Tickets], context.previousTickets);
+    },
+    onSettled: () => {
+      // Refetch the ticket list to sync with server
+      queryClient.invalidateQueries({ queryKey: [QueryKeys.Tickets] });
     },
   });
 

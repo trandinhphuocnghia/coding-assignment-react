@@ -12,7 +12,6 @@ import CreateTicket from './modal/CreateTicket';
 export function Tickets() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-
   const userId = queryParams.get('userId');
 
   const { data, isFetching, isLoading } = useTickets();
@@ -96,7 +95,7 @@ export function Tickets() {
 
   return (
     <div className="w-full flex flex-col gap-6 relative p-3 lg:px-7">
-      <div className="w-full rounded-2xl p-3 bg-[#FAFAFA] sticky top-3 z-10 flex gap-6 flex-col md:flex-row items-center">
+      <div className="w-full rounded-2xl p-3 bg-[#FAFAFA] sticky top-3 z-10 flex gap-4 flex-col md:flex-row items-center">
         <div className="w-full flex items-center gap-6">
           <Input
             rootclassname="w-full !max-w-[343px] text-[#787486] max-w-md rounded-lg hover:outline transition-all hover:outline-[#7784EE] text-xs flex items-center px-4 py-2 justify-center bg-white gap-3"
@@ -106,7 +105,7 @@ export function Tickets() {
             endAdornment={<SearchIcon size={16} />}
           />
         </div>
-        <div className=" w-full max-w-40 py-2 rounded-2xl gap-2">
+        <div className=" w-full md:max-w-40 py-2 rounded-2xl gap-2">
           <div className="w-full flex items-center justify-between">
             <p className="text-[10px]">Task progress</p>
             <p className="text-[10px]">
